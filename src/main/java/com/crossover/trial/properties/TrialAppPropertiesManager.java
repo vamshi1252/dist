@@ -1,10 +1,13 @@
 package com.crossover.trial.properties;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
-import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
+
+import com.crossover.trial.factory.ParserFactory;
+import com.crossover.trial.reader.Reader;
 
 /**
  * A simple main method to load and print properties. You should feel free to change this class
@@ -16,10 +19,25 @@ import java.util.List;
  * @author code test administrator
  */
 public class TrialAppPropertiesManager implements AppPropertiesManager {
+	
+	private static final Reader reader = new Reader();
 
     @Override
     public AppProperties loadProps(List<String> propUris) {
-        return new TrialAppProperties();
+    	
+    	String p= "classpath:resources/jdbc.properties";
+    	
+    	TrialAppProperties trialAppProperties = new TrialAppProperties();
+    	if(CollectionUtils.isNotEmpty(propUris)) {
+    		for(String path : propUris) {
+    		     String type = path.split(":")[0];
+    		     InputStream inputStream  = reader.getStream(type, path);
+    		     ParserFactory.getInstance(path.split(".")[1]);
+    		}
+    	}
+    	
+    	
+        return trialAppProperties;
     }
 
     @Override

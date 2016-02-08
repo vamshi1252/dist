@@ -3,10 +3,15 @@ package com.crossover.trial.properties;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Properties;
+
+import org.apache.commons.collections.CollectionUtils;
 
 /**
  * Provides example usage of the API and classes - although candidates can use this
@@ -33,10 +38,13 @@ public class Main {
         }
 
         List<String> propertySourceUris = Arrays.asList(args).subList(1, args.length);
+        
+        //Code starts here
 
         // invoke the property parser and print out properties alphabetically
         AppPropertiesManager m = new TrialAppPropertiesManager();
         AppProperties props = m.loadProps(propertySourceUris);
         m.printProperties(props, new PrintStream(new FileOutputStream(outputFile)));
     }
+    
 }
