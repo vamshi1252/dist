@@ -10,13 +10,13 @@
 
     <!-- you may add dependencies here -->
     <dependencies>
-
-        <dependency>
+ 
+     <!--    <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
             <version>1.10.50</version>
-        </dependency>
-
+        </dependency> -->
+ 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
