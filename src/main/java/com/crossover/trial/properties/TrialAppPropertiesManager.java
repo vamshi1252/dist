@@ -23,15 +23,13 @@ public class TrialAppPropertiesManager implements AppPropertiesManager {
 
     @Override
     public AppProperties loadProps(List<String> propUris) {
-    	
-    	String p= "classpath:resources/jdbc.properties";
-    	
     	TrialAppProperties trialAppProperties = new TrialAppProperties();
     	if(CollectionUtils.isNotEmpty(propUris)) {
     		for(String path : propUris) {
     		     String type = path.split(":")[0];
     		     InputStream inputStream  = reader.getStream(type, path);
     		     ParserFactory.getInstance(path.split(".")[1]);
+    		     
     		}
     	}
     	

@@ -29,7 +29,7 @@ public class PropertiesImpl implements Parser {
 		}
 		List<TrialProperty> TrialProperties = new ArrayList<TrialProperty>();
 		Properties properties = new Properties();
-		try {
+		try { 
 			properties.load(inputStream);
 			Enumeration e = properties.keys();
 			 while (e.hasMoreElements()) {
