@@ -15,6 +15,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class TrialProperty {
 
+    public TrialProperty() {}
+
     private String propertyName;
     private String propertyType;
     private String propertyValue;
