@@ -15,4 +15,5 @@ import com.crossover.trial.dto.TrialProperty;
 public interface Parser {
 	
 	List<TrialProperty> getProps(InputStream inputStream);
+	
 }

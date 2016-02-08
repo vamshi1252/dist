@@ -3,6 +3,7 @@
  */
 package com.crossover.trial.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -10,11 +11,12 @@ import lombok.Data;
  *
  */
 
-@Data 
+@Data
+@AllArgsConstructor
 public class TrialProperty {
-	
-	private String propertyName;
-	private String propertyType;
-	private String propertyValue;
-	
+
+    private String propertyName;
+    private String propertyType;
+    private String propertyValue;
+
 }

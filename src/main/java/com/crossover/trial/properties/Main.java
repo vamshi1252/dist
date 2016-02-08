@@ -14,10 +14,9 @@ import java.util.Properties;
 import org.apache.commons.collections.CollectionUtils;
 
 /**
- * Provides example usage of the API and classes - although candidates can use this
- * Main method to test if their changes will be accepted by the autograder. If your
- * solution is incompatible with this main method, it will be incompatible with the
- * autograder and may cause your solution to be failed.
+ * Provides example usage of the API and classes - although candidates can use this Main method to test if their changes
+ * will be accepted by the autograder. If your solution is incompatible with this main method, it will be incompatible
+ * with the autograder and may cause your solution to be failed.
  * 
  * @author code test administrator
  */

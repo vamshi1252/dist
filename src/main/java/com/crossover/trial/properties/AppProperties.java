@@ -32,12 +32,10 @@ public interface AppProperties {
     void clear();
 
     /**
-     *  Retrieve the property for the given key. Keys are case-insenstive
-     *  and the use of . and _ in property names is interchangable. For example,
-     *  jpa.showSQL, jpa_showsql and JPA_showSql should all retrieve the same value.
+     * Retrieve the property for the given key. Keys are case-insenstive and the use of . and _ in property names is
+     * interchangable. For example, jpa.showSQL, jpa_showsql and JPA_showSql should all retrieve the same value.
      *
-     * @param key a property key, handled without case sensitivity. '.' and '_' are
-     *            treated as equivalent
+     * @param key a property key, handled without case sensitivity. '.' and '_' are treated as equivalent
      * @return an object of the given key or null if it is not available
      */
     Object get(String key);

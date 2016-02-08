@@ -10,9 +10,8 @@ import com.crossover.trial.factory.ParserFactory;
 import com.crossover.trial.reader.Reader;
 
 /**
- * A simple main method to load and print properties. You should feel free to change this class
- * or to create additional class. You may add addtional methods, but must implement the 
- * AppPropertiesManager API contract.
+ * A simple main method to load and print properties. You should feel free to change this class or to create additional
+ * class. You may add addtional methods, but must implement the AppPropertiesManager API contract.
  * 
  * Note: a default constructor is required
  *

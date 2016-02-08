@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * A dummy implementation of TrialAppProperties, this clearly doesn't work. Candidates SHOULD change 
- * this class to add their implementation. You are also free to create additional classes
+ * A dummy implementation of TrialAppProperties, this clearly doesn't work. Candidates SHOULD change this class to add
+ * their implementation. You are also free to create additional classes
  *
  * note: a default constructor is required.
  *
@@ -38,4 +38,3 @@ public class TrialAppProperties implements AppProperties {
         return "dummy";
     }
 }
-
