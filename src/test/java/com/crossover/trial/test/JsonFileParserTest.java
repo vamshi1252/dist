@@ -1,12 +1,12 @@
 package com.crossover.trial.test;
 
-import com.crossover.trial.dto.TrialProperty;
+import com.crossover.trial.exception.ConfigException;
 import com.crossover.trial.parser.impl.JsonFileParser;
+import com.crossover.trial.properties.TrialAppProperties;
 import com.crossover.trial.reader.Reader;
 import org.junit.Test;
 
 import java.io.InputStream;
-import java.util.List;
 
 /**
  *
@@ -17,9 +17,18 @@ public class JsonFileParserTest {
     @Test
     public void testJsonFileParser() {
 
-        InputStream inputStream = new Reader().getClassPathStream("classpath:config.json");
+        Reader reader = new Reader();
+        InputStream inputStream = reader.getStream("classpath", "classpath:config.json");
         JsonFileParser jsonFileParser = new JsonFileParser();
-        List<TrialProperty> trialProperties = jsonFileParser.getProps(inputStream);
-        System.out.println(trialProperties);
+        TrialAppProperties trialAppProperties = new TrialAppProperties();
+
+        try {
+            jsonFileParser.getProps(inputStream, trialAppProperties);
+            System.out.println(trialAppProperties.getKnownProperties());
+            System.out.println(trialAppProperties.getMissingProperties());
+            System.out.println(trialAppProperties.isValid());
+        } catch (ConfigException e) {
+            e.printStackTrace();
+        }
     }
 }
