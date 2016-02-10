@@ -38,6 +38,7 @@ public class TrialAppPropertiesManager implements AppPropertiesManager {
     		     try {
 					parser.getProps(inputStream,trialAppProperties);
 				} catch (ConfigException e) {
+					
 					trialAppProperties.setFlag(false);
 				}
     		}

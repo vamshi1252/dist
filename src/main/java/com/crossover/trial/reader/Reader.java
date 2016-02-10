@@ -13,11 +13,11 @@ import java.net.URL;
  */
 public class  Reader {
 	
-	public  InputStream getClassPathStream(String path) {
+	private  InputStream getClassPathStream(String path) {
 		 return  this.getClass().getResourceAsStream( path);
 	}
 	
-	public  InputStream getFileStream(String path) {
+	private  InputStream getFileStream(String path) {
 		InputStream input = null;
 		try {
 			 input = new FileInputStream(path);
@@ -27,7 +27,7 @@ public class  Reader {
 		return input;
 	}
 	
-	public InputStream getUrlStream(String path) {
+	private InputStream getUrlStream(String path) {
 		InputStream input = null;
 		try {
 			input = new URL(path).openStream();

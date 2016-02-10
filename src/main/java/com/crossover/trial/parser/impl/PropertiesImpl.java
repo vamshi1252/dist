@@ -37,18 +37,18 @@ public class PropertiesImpl implements Parser {
 			properties.load(inputStream);
 			Enumeration e = properties.keys();
 			 while (e.hasMoreElements()) {
-				 TrialProperty tp = new TrialProperty();
+				 TrialProperty trialProperty = new TrialProperty();
 			      String key = (String) e.nextElement();
-			      tp.setPropertyName(key);
+			      trialProperty.setPropertyName(key);
 			      if(StringUtils.isEmpty(properties.getProperty(key))) {
-			    	  tp.setKnown(false);
+			    	  trialProperty.setKnown(false);
 			      }
-			      tp.setPropertyValue(properties.getProperty(key));
-			      tp.setPropertyType(DataTypeUtil.getDataType((Object)properties.getProperty(key)));
-			      trialAppProperties.setProperties(tp);
+			      trialProperty.setPropertyValue(properties.getProperty(key));
+			      trialProperty.setPropertyType(DataTypeUtil.getDataType((Object)properties.getProperty(key)));
+			      trialAppProperties.setProperties(trialProperty);
 			 }
 		} catch (IOException | IllegalArgumentException  e) {
-			throw new ConfigException("Exception occured during parsing");
+			throw new ConfigException("Exception occured while parsing properties file", e);
 		}
 	}
 }

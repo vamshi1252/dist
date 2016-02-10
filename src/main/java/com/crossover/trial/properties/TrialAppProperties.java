@@ -50,6 +50,7 @@ public class TrialAppProperties implements AppProperties {
     @Override
     public Object get(String key) {
     	if(StringUtils.isNotEmpty(key)) {
+    		key.replace(".", "_");
     		TrialProperty trialProperty = properties.get(key.toLowerCase());
     		if(trialProperty!=null) {
     			return trialProperty.getPropertyValue();
@@ -72,7 +73,7 @@ public class TrialAppProperties implements AppProperties {
     		}
     		missingProperties.add(trialProperty.getPropertyName());
     	}
-    	this.properties.put(trialProperty.getPropertyName().toLowerCase(), trialProperty);
+    	this.properties.put(trialProperty.getPropertyName().toLowerCase().replace('.', '_'), trialProperty);
     }
     
     public void setFlag(boolean valid) {
