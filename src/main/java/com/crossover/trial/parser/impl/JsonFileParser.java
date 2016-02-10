@@ -4,7 +4,7 @@ import com.crossover.trial.dto.TrialProperty;
 import com.crossover.trial.exception.ConfigException;
 import com.crossover.trial.parser.Parser;
 import com.crossover.trial.properties.TrialAppProperties;
-import com.crossover.trial.utils.JSONDataTypeUtil;
+import com.crossover.trial.utils.DataTypeUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -42,7 +42,7 @@ public class JsonFileParser implements Parser {
 
                 String propertyName = key.toString();
                 String propertyValue = obj.get(key).toString();
-                String propertyType = JSONDataTypeUtil.getDataType(propertyValue);
+                String propertyType = DataTypeUtil.getDataType(propertyValue);
                 TrialProperty property = new TrialProperty(propertyName, propertyType, propertyValue, true);
 
                 if (StringUtils.isBlank(propertyValue)) {
