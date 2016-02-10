@@ -66,13 +66,14 @@ public class TrialAppProperties implements AppProperties {
     	if(trialProperty.isKnown()) {
     		if(!knownProperties.contains(trialProperty.getPropertyName().toLowerCase())) {
     			knownProperties.add(trialProperty.getPropertyName().toLowerCase());
+    			this.properties.put(trialProperty.getPropertyName().toLowerCase().replace('.', '_'), trialProperty);
     		}
     	} else {
     		if(!missingProperties.contains(trialProperty.getPropertyName().toLowerCase())) {
     			missingProperties.add(trialProperty.getPropertyName().toLowerCase());
     		}
     	}
-    	this.properties.put(trialProperty.getPropertyName().toLowerCase().replace('.', '_'), trialProperty);
+    	
     }
     
     public void setFlag(boolean valid) {
