@@ -10,8 +10,13 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.crossover.trial.dto.TrialProperty;
+import com.crossover.trial.exception.ConfigException;
 import com.crossover.trial.parser.Parser;
+import com.crossover.trial.properties.TrialAppProperties;
+import com.crossover.trial.utils.DataTypeUtil;
 
 /**
  * @author vamshi.vijay
@@ -23,11 +28,10 @@ public class PropertiesImpl implements Parser {
 	 * @see com.crossover.trial.parser.Parser#getProps(java.lang.String)
 	 */
 	@Override
-	public List<TrialProperty> getProps(InputStream  inputStream) {
+	public void getProps(InputStream  inputStream, TrialAppProperties trialAppProperties) throws ConfigException {
 		if(inputStream == null) {
-			return null;
+			return ;
 		}
-		List<TrialProperty> TrialProperties = new ArrayList<TrialProperty>();
 		Properties properties = new Properties();
 		try { 
 			properties.load(inputStream);
@@ -36,13 +40,15 @@ public class PropertiesImpl implements Parser {
 				 TrialProperty tp = new TrialProperty();
 			      String key = (String) e.nextElement();
 			      tp.setPropertyName(key);
+			      if(StringUtils.isEmpty(properties.getProperty(key))) {
+			    	  tp.setKnown(false);
+			      }
 			      tp.setPropertyValue(properties.getProperty(key));
-			      System.out.println(key + " -- " + properties.getProperty(key));
-			      TrialProperties.add(tp);
+			      tp.setPropertyType(DataTypeUtil.getDataType((Object)properties.getProperty(key)));
+			      trialAppProperties.setProperties(tp);
 			 }
-		} catch (IOException e) {
+		} catch (IOException | IllegalArgumentException  e) {
+			throw new ConfigException("Exception occured during parsing");
 		}
-		return TrialProperties;
 	}
-
 }

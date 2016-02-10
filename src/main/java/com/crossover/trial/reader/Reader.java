@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.crossover.trial.reader;
 
 import java.io.FileInputStream;
@@ -17,7 +14,7 @@ import java.net.URL;
 public class  Reader {
 	
 	public  InputStream getClassPathStream(String path) {
-		 return  this.getClass().getResourceAsStream("/" + path);
+		 return  this.getClass().getResourceAsStream( path);
 	}
 	
 	public  InputStream getFileStream(String path) {

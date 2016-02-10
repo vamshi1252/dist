@@ -37,7 +37,7 @@ public class JsonFileParser implements Parser {
             for (Object key : obj.keySet()) {
 
                 TrialProperty property = new TrialProperty(key.toString(), DataTypeUtil.getDataType(obj.get(key)), obj
-                        .get(key).toString());
+                        .get(key).toString(), true);
                 trialProperties.add(property);
             }
             return trialProperties;
@@ -54,7 +54,6 @@ public class JsonFileParser implements Parser {
     }
 
     public static void main(String[] args) throws ParseException {
-
         JsonFileParser jsonFileParser = new JsonFileParser();
         JSONObject obj = jsonFileParser
                 .parseJSON("{ \"auth.endpoint.uri\": \"https://authserver/v1/auth\", \"job.timeout\": 3600, \"sns.broadcast.topic_name\": \"broadcast\", \"score.factor\": 2.4, \"jpa.showSql\": false, \"aws_region_id\": \"us-east-1\" }");
@@ -63,7 +62,8 @@ public class JsonFileParser implements Parser {
         for (Object key : obj.keySet()) {
 
             TrialProperty property = new TrialProperty(key.toString(), DataTypeUtil.getDataType(obj.get(key)), obj.get(
-                    key).toString());
+                    key).toString(), true);
+            
             System.out.println(property);
         }
     }

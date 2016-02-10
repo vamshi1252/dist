@@ -20,5 +20,6 @@ public class TrialProperty {
     private String propertyName;
     private String propertyType;
     private String propertyValue;
+    private boolean known;
 
 }
