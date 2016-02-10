@@ -4,5 +4,6 @@
   "sns.broadcast.topic_name": "broadcast",
   "score.factor": 2.4,
   "jpa.showSql": false,
-  "aws_region_id": "us-east-1"
+  "aws_region_id": "us-east-1",
+  "date": "2016-02-01"
 }

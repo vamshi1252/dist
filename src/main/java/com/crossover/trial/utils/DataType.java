@@ -17,7 +17,8 @@ public enum DataType {
     REGION(Regions.class.toString()),
     DOUBLE(Double.class.toString());
 
-    @Getter private String className;
+    @Getter
+    private String className;
 
     DataType(String className) {
 

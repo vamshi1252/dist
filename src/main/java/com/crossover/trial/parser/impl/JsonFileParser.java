@@ -3,6 +3,7 @@ package com.crossover.trial.parser.impl;
 import com.crossover.trial.dto.TrialProperty;
 import com.crossover.trial.parser.Parser;
 import com.crossover.trial.utils.DataTypeUtil;
+import com.crossover.trial.utils.JSONDataTypeUtil;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -28,6 +29,7 @@ public class JsonFileParser implements Parser {
         String line = "";
         List<TrialProperty> trialProperties = new ArrayList<>();
         try {
+
             while ((line = bufferedReader.readLine()) != null) {
                 stringBuilder.append(line);
             }
@@ -36,8 +38,10 @@ public class JsonFileParser implements Parser {
 
             for (Object key : obj.keySet()) {
 
-                TrialProperty property = new TrialProperty(key.toString(), DataTypeUtil.getDataType(obj.get(key)), obj
-                        .get(key).toString());
+                String propertyName = key.toString();
+                String propertyValue = obj.get(key).toString();
+                String propertyType = JSONDataTypeUtil.getDataType(propertyValue);
+                TrialProperty property = new TrialProperty(propertyName, propertyType, propertyValue);
                 trialProperties.add(property);
             }
             return trialProperties;
@@ -57,13 +61,14 @@ public class JsonFileParser implements Parser {
 
         JsonFileParser jsonFileParser = new JsonFileParser();
         JSONObject obj = jsonFileParser
-                .parseJSON("{ \"auth.endpoint.uri\": \"https://authserver/v1/auth\", \"job.timeout\": 3600, \"sns.broadcast.topic_name\": \"broadcast\", \"score.factor\": 2.4, \"jpa.showSql\": false, \"aws_region_id\": \"us-east-1\" }");
+                .parseJSON("{ \"auth.endpoint.uri\": \"https://authserver/v1/auth\", \"job.timeout\": 3600, \"sns.broadcast.topic_name\": \"broadcast\", \"score.factor\": 2.4, \"jpa.showSql\": false, \"aws_region_id\": \"us-east-1\", \"date\": \"Wed Feb 10 23:12:26 IST 2016\", \"key\": \"\"}");
         System.out.println(obj.keySet());
         System.out.println(Object.class.toString());
+
         for (Object key : obj.keySet()) {
 
-            TrialProperty property = new TrialProperty(key.toString(), DataTypeUtil.getDataType(obj.get(key)), obj.get(
-                    key).toString());
+            TrialProperty property = new TrialProperty(key.toString(),
+                    DataTypeUtil.getDataType(obj.get(key).toString()), obj.get(key).toString());
             System.out.println(property);
         }
     }
