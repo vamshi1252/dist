@@ -4,10 +4,6 @@ import com.amazonaws.regions.Regions;
 import lombok.Getter;
 import org.json.simple.JSONArray;
 
-/**
- *
- * Created by Anirudh Rachuri on 9/2/16.
- */
 public enum DataType {
 
     INTEGER(Integer.class.toString()),

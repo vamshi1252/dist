@@ -4,10 +4,6 @@ import com.amazonaws.regions.Regions;
 
 import static com.crossover.trial.utils.DataType.*;
 
-/**
- * 
- * Created by Anirudh Rachuri on 10/2/16.
- */
 public class DataTypeUtil {
 
     public static String getDataType(String string) {

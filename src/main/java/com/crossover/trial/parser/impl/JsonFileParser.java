@@ -17,10 +17,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 
- * Created by Anirudh Rachuri on 9/2/16.
- */
+
 public class JsonFileParser implements Parser {
 
     @Override
