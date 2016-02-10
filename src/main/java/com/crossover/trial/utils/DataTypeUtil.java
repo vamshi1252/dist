@@ -5,41 +5,41 @@ import com.amazonaws.regions.Regions;
 import static com.crossover.trial.utils.DataType.*;
 
 /**
- *
- * Created by Anirudh Rachuri on 9/2/16.
+ * 
+ * Created by Anirudh Rachuri on 10/2/16.
  */
 public class DataTypeUtil {
 
-    public static String getDataType(Object object) {
+    public static String getDataType(String string) {
 
-        try {
+        String trimmedString = string.trim();
 
-            System.out.println(object.getClass().toString());
-            switch (DataType.fromName(object.getClass().toString())) {
+        if (isAwsRegion(trimmedString)) {
 
-                case INTEGER:
-                    return INTEGER.getClassName();
-
-                case LONG:
-                    return isInteger((Long) object) ? Integer.class.toString() : LONG.getClassName();
-
-                case STRING:
-                    return isAwsRegion(object.toString()) ? REGION.getClassName() : STRING.getClassName();
-
-                case BOOLEAN:
-                    return BOOLEAN.getClassName();
-
-                case DOUBLE:
-                    return DOUBLE.getClassName();
-
-                default:
-                    return Object.class.toString();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return object.getClass().toString();
+            return REGION.getClassName();
         }
+
+        if (isInteger(trimmedString)) {
+
+            return INTEGER.getClassName();
+        }
+
+        if (isLong(trimmedString)) {
+
+            return LONG.getClassName();
+        }
+
+        if (isDouble(trimmedString)) {
+
+            return DOUBLE.getClassName();
+        }
+
+        if (isBoolean(trimmedString)) {
+
+            return BOOLEAN.getClassName();
+        }
+        return STRING.getClassName();
+
     }
 
     private static boolean isAwsRegion(String string) {
@@ -53,14 +53,38 @@ public class DataTypeUtil {
         }
         return true;
     }
-
-    private static boolean isInteger(Long value) {
+    private static boolean isInteger(String string) {
 
         try {
-            Math.toIntExact(value);
-        } catch (ArithmeticException e) {
+            Integer.parseInt(string);
+        } catch (NumberFormatException e) {
             return false;
         }
         return true;
+    }
+
+    private static boolean isDouble(String string) {
+
+        try {
+            Double.parseDouble(string);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isLong(String string) {
+
+        try {
+            Long.parseLong(string);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isBoolean(String string) {
+
+        return string.equalsIgnoreCase(Boolean.TRUE.toString()) || string.equalsIgnoreCase(Boolean.FALSE.toString());
     }
 }

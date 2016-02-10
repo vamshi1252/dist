@@ -44,7 +44,7 @@ public class PropertiesImpl implements Parser {
 			    	  trialProperty.setKnown(false);
 			      }
 			      trialProperty.setPropertyValue(properties.getProperty(key));
-			      trialProperty.setPropertyType(DataTypeUtil.getDataType((Object)properties.getProperty(key)));
+			      trialProperty.setPropertyType(DataTypeUtil.getDataType(properties.getProperty(key)));
 			      trialAppProperties.setProperties(trialProperty);
 			 }
 		} catch (IOException | IllegalArgumentException  e) {

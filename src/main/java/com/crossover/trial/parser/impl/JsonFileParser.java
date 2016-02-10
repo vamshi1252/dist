@@ -1,8 +1,11 @@
 package com.crossover.trial.parser.impl;
 
 import com.crossover.trial.dto.TrialProperty;
+import com.crossover.trial.exception.ConfigException;
 import com.crossover.trial.parser.Parser;
-import com.crossover.trial.utils.DataTypeUtil;
+import com.crossover.trial.properties.TrialAppProperties;
+import com.crossover.trial.utils.JSONDataTypeUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,13 +24,14 @@ import java.util.List;
 public class JsonFileParser implements Parser {
 
     @Override
-    public List<TrialProperty> getProps(InputStream data) {
+    public void getProps(InputStream inputStream, TrialAppProperties trialAppProperties) throws ConfigException {
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(data));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder stringBuilder = new StringBuilder();
         String line = "";
         List<TrialProperty> trialProperties = new ArrayList<>();
         try {
+
             while ((line = bufferedReader.readLine()) != null) {
                 stringBuilder.append(line);
             }
@@ -36,15 +40,22 @@ public class JsonFileParser implements Parser {
 
             for (Object key : obj.keySet()) {
 
-                TrialProperty property = new TrialProperty(key.toString(), DataTypeUtil.getDataType(obj.get(key)), obj
-                        .get(key).toString(), true);
-                trialProperties.add(property);
+                String propertyName = key.toString();
+                String propertyValue = obj.get(key).toString();
+                String propertyType = JSONDataTypeUtil.getDataType(propertyValue);
+                TrialProperty property = new TrialProperty(propertyName, propertyType, propertyValue, true);
+
+                if (StringUtils.isBlank(propertyValue)) {
+
+                    property.setKnown(false);
+                }
+                trialAppProperties.setProperties(property);
             }
-            return trialProperties;
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new ConfigException("Exception occurred while reading json file", e);
+        } catch (ParseException e) {
+            throw new ConfigException("Exception occurred while paring json", e);
         }
-        return null;
     }
 
     private JSONObject parseJSON(String data) throws ParseException {
@@ -53,18 +64,5 @@ public class JsonFileParser implements Parser {
         return (JSONObject) jsonParser.parse(data);
     }
 
-    public static void main(String[] args) throws ParseException {
-        JsonFileParser jsonFileParser = new JsonFileParser();
-        JSONObject obj = jsonFileParser
-                .parseJSON("{ \"auth.endpoint.uri\": \"https://authserver/v1/auth\", \"job.timeout\": 3600, \"sns.broadcast.topic_name\": \"broadcast\", \"score.factor\": 2.4, \"jpa.showSql\": false, \"aws_region_id\": \"us-east-1\" }");
-        System.out.println(obj.keySet());
-        System.out.println(Object.class.toString());
-        for (Object key : obj.keySet()) {
 
-            TrialProperty property = new TrialProperty(key.toString(), DataTypeUtil.getDataType(obj.get(key)), obj.get(
-                    key).toString(), true);
-            
-            System.out.println(property);
-        }
-    }
 }
