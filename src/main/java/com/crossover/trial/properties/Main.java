@@ -29,13 +29,17 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws URISyntaxException, IOException {
-
+    	
+    	args = new String[]{"output.txt", "classpath:config.json"};
+    
         // process command line arguments into URIs
         File outputFile = new File(args[0]);
         if (outputFile.exists()) {
             outputFile.delete();
         }
-
+    
+    	
+    	
         List<String> propertySourceUris = Arrays.asList(args).subList(1, args.length);
         
         //Code starts here

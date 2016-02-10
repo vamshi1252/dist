@@ -1,9 +1,9 @@
 package com.crossover.trial.properties;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,7 +19,7 @@ import com.crossover.trial.dto.TrialProperty;
  */
 public class TrialAppProperties implements AppProperties {
 	
-	private Map<String, TrialProperty> properties = new HashMap<String, TrialProperty>();
+	private Map<String, TrialProperty> properties = new TreeMap<String, TrialProperty>();
 	private List<String> missingProperties =  new ArrayList<String>();
 	private List<String> knownProperties =  new ArrayList<String>();
 	private boolean valid = true;
@@ -71,12 +71,25 @@ public class TrialAppProperties implements AppProperties {
     		if(!missingProperties.contains(trialProperty.getPropertyName().toLowerCase())) {
     			missingProperties.add(trialProperty.getPropertyName().toLowerCase());
     		}
-    		missingProperties.add(trialProperty.getPropertyName());
     	}
     	this.properties.put(trialProperty.getPropertyName().toLowerCase().replace('.', '_'), trialProperty);
     }
     
     public void setFlag(boolean valid) {
     	this.valid = valid;
+    }
+    
+    @Override
+    public String toString() {
+    	StringBuilder sb = new StringBuilder();
+    	for (Map.Entry<String, TrialProperty> entry : properties.entrySet()) {
+    		TrialProperty tp = entry.getValue();
+    		
+    		sb.append(tp.getPropertyName());
+    		sb.append(", " + tp.getPropertyType());
+    		sb.append(", " + tp.getPropertyValue());
+    		sb.append("\n");
+		}
+    	return sb.toString();
     }
 }
