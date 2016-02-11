@@ -30,7 +30,7 @@ public class Main {
      */
     public static void main(String[] args) throws URISyntaxException, IOException {
     	
-    	args = new String[]{"output.txt", "classpath:config.json"};
+    	args = new String[]{"output.txt", "classpath:aws.properties", "http://anirudhrachuri.github.io/random.json"};
     
         // process command line arguments into URIs
         File outputFile = new File(args[0]);

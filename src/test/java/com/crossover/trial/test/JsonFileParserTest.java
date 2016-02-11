@@ -8,10 +8,6 @@ import org.junit.Test;
 
 import java.io.InputStream;
 
-/**
- *
- * Created by Anirudh Rachuri on 11/2/16.
- */
 public class JsonFileParserTest {
 
     @Test

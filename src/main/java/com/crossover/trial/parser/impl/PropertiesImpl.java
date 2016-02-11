@@ -38,6 +38,7 @@ public class PropertiesImpl implements Parser {
 			Enumeration e = properties.keys();
 			 while (e.hasMoreElements()) {
 				 TrialProperty trialProperty = new TrialProperty();
+				 trialProperty.setKnown(true);
 			      String key = (String) e.nextElement();
 			      trialProperty.setPropertyName(key);
 			      if(StringUtils.isEmpty(properties.getProperty(key))) {
