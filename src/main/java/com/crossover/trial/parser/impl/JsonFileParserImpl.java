@@ -5,6 +5,7 @@ import com.crossover.trial.exception.ConfigException;
 import com.crossover.trial.parser.Parser;
 import com.crossover.trial.properties.TrialAppProperties;
 import com.crossover.trial.utils.DataTypeUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,39 +15,39 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * JsonParser to extract the properties form Json files
  * 
- *  @author vamshi.vijay
+ * @author vamshi.vijay
  */
+@Slf4j
 public class JsonFileParserImpl implements Parser {
 
-	/**
-	 * Populates the properties extracted from inputstream to TrialAppProperties 
-	 * 
-	 * @param inputStream   stream from which properties need to be extracted
-	 * @param trialAppProperties   properties will be populated into this object
-	 * @throws ConfigException
-	 */
+    /**
+     * Populates the properties extracted from inputstream to TrialAppProperties
+     * 
+     * @param inputStream stream from which properties need to be extracted
+     * @param trialAppProperties properties will be populated into this object
+     * @throws ConfigException
+     */
     @Override
     public void getProps(InputStream inputStream, TrialAppProperties trialAppProperties) throws ConfigException {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder stringBuilder = new StringBuilder();
         String line = "";
-        List<TrialProperty> trialProperties = new ArrayList<>();
         try {
 
             while ((line = bufferedReader.readLine()) != null) {
+
                 stringBuilder.append(line);
             }
             JSONParser jsonParser = new JSONParser();
             JSONObject obj = (JSONObject) jsonParser.parse(stringBuilder.toString());
 
+            log.info("Parsed a json file");
             for (Object key : obj.keySet()) {
 
                 String propertyName = key.toString();
@@ -58,20 +59,13 @@ public class JsonFileParserImpl implements Parser {
 
                     property.setKnown(false);
                 }
+                log.info("Parsed a TrialProperty: [{}] from json", property);
                 trialAppProperties.setProperties(property);
             }
         } catch (IOException e) {
             throw new ConfigException("Exception occurred while reading json file", e);
         } catch (ParseException e) {
-            throw new ConfigException("Exception occurred while paring json", e);
+            throw new ConfigException("Exception occurred while parsing json file", e);
         }
     }
-
-    private JSONObject parseJSON(String data) throws ParseException {
-
-        JSONParser jsonParser = new JSONParser();
-        return (JSONObject) jsonParser.parse(data);
-    }
-
-
 }

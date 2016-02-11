@@ -7,6 +7,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import com.crossover.trial.dto.TrialProperty;
@@ -20,6 +21,7 @@ import com.crossover.trial.utils.DataTypeUtil;
  * 
  * @author vamshi.vijay
  */
+@Slf4j
 public class PropertiesFileParserImpl implements Parser {
 
 	/**
@@ -38,6 +40,7 @@ public class PropertiesFileParserImpl implements Parser {
 		try { 
 			properties.load(inputStream);
 			Enumeration e = properties.keys();
+			log.info("Parsed a properties file");
 			 while (e.hasMoreElements()) {
 				 TrialProperty trialProperty = new TrialProperty();
 				 trialProperty.setKnown(true);
@@ -48,9 +51,10 @@ public class PropertiesFileParserImpl implements Parser {
 			      }
 			      trialProperty.setPropertyValue(properties.getProperty(key));
 			      trialProperty.setPropertyType(DataTypeUtil.getDataType(properties.getProperty(key)));
+			      log.info("Parsed a TrialProperty: [{}] from properties file", trialProperty);
 			      trialAppProperties.setProperties(trialProperty);
 			 }
-		} catch (IOException | IllegalArgumentException  e) {
+		} catch (IOException e) {
 			throw new ConfigException("Exception occured while parsing properties file", e);
 		}
 	}

@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 
 import com.crossover.trial.dto.TrialProperty;
@@ -16,6 +17,7 @@ import com.crossover.trial.reader.Reader;
 /**
  * @author code test administrator
  */
+@Slf4j
 public class TrialAppPropertiesManager implements AppPropertiesManager {
 	
 	private static final Reader reader = new Reader();
@@ -31,11 +33,14 @@ public class TrialAppPropertiesManager implements AppPropertiesManager {
     		     int len = extensions.length;
     		     Parser parser = ParserFactory.getInstance(extensions[len-1]);
     		     try {
+					log.info("Parsing file: [{}]", path);
 					parser.getProps(inputStream,trialAppProperties);
 				} catch (ConfigException e) {
-					
+
+					log.error("Exception occurred due to config problem in file: [{}]", path, e);
 					trialAppProperties.setFlag(false);
 				}
+				log.info("List of properties loaded from input files [{}]", trialAppProperties);
     		}
     	}
         return trialAppProperties;
