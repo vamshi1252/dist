@@ -17,39 +17,51 @@ import com.crossover.trial.reader.Reader;
  * @author code test administrator
  */
 public class TrialAppPropertiesManager implements AppPropertiesManager {
-	
+
 	private static final Reader reader = new Reader();
 
-    @Override
-    public AppProperties loadProps(List<String> propUris) {
-    	TrialAppProperties trialAppProperties = new TrialAppProperties();
-    	if(CollectionUtils.isNotEmpty(propUris)) {
-    		for(String path : propUris) {
-    		     String type = path.split(":")[0];
-    		     InputStream inputStream  = reader.getStream(type, path);
-    		     String[] extensions = path.split("\\.");
-    		     int len = extensions.length;
-    		     Parser parser = ParserFactory.getInstance(extensions[len-1]);
-    		     try {
-					parser.getProps(inputStream,trialAppProperties);
+	private TrialAppProperties trialAppProperties = new TrialAppProperties();
+
+	@Override
+	public AppProperties loadProps(List<String> propUris) {
+		trialAppProperties = new TrialAppProperties();
+		if (CollectionUtils.isNotEmpty(propUris)) {
+			for (String path : propUris) {
+				try {
+					String type = path.split(":")[0];
+					InputStream inputStream = reader.getStream(type, path);
+					if (inputStream == null) {
+						throw new ConfigException("Invalid Stream");
+					}
+					String[] extensions = path.split("\\.");
+					int len = extensions.length;
+					Parser parser = ParserFactory
+							.getInstance(extensions[len - 1]);
+					if(parser == null) {
+						throw new ConfigException("Not a valid file extension");
+					}
+					parser.getProps(inputStream, trialAppProperties);
 				} catch (ConfigException e) {
-					
 					trialAppProperties.setFlag(false);
 				}
-    		}
-    	}
-        return trialAppProperties;
-    }
+			}
+		}
+		return trialAppProperties;
+	}
 
-    @Override
-    public void printProperties(AppProperties props, PrintStream sync) {
-        sync.println(props);
-    }
-    
-    public static void main(String[] args) {
-    	TrialAppPropertiesManager tp = new TrialAppPropertiesManager();
-    	List<String> propUris  = new ArrayList<String>();
-    	propUris.add("file:///Users/vamshi.vijay/codebase/test/properties-dist/src/main/resources/aws.properties");
-    	tp.loadProps(propUris);
-    }
+	@Override
+	public void printProperties(AppProperties props, PrintStream sync) {
+		sync.println(props);
+	}
+
+	public TrialAppProperties getTrialAppProperties() {
+		return trialAppProperties;
+	}
+
+	public static void main(String[] args) {
+		TrialAppPropertiesManager tp = new TrialAppPropertiesManager();
+		List<String> propUris = new ArrayList<String>();
+		propUris.add("file:///Users/vamshi.vijay/codebase/test/properties-dist/src/main/resources/aws.properties");
+		tp.loadProps(propUris);
+	}
 }
