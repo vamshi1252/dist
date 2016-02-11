@@ -4,8 +4,9 @@
 package com.crossover.trial.exception;
 
 /**
+ * Internal exception marker
+ * 
  * @author vamshi.vijay
- *
  */
 public class ConfigException extends Exception
 {

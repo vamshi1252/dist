@@ -8,10 +8,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
+ * This class is a utility class to read from differnt sources(classpath,url,file)
+ * 
  * @author vamshi.vijay
- *
  */
 public class  Reader {
+	
+	private static final String FILE = "file";
+	private static final String CLASSPATH = "classpath";
+	private static final String HTTP = "http";
+	
 	
 	private  InputStream getClassPathStream(String path) {
 		 return  this.getClass().getResourceAsStream( path);
@@ -39,14 +45,14 @@ public class  Reader {
 	
 	public  InputStream getStream(String type, String path) {
 		switch(type.toLowerCase()) {
-	     case "file" :
+	     case FILE :
 	    	  return getUrlStream(path);
-	     case "classpath":
+	     case CLASSPATH :
 	    	 if(path.split(":").length >1) 
 	    		 return getClassPathStream("/" + path.split(":")[1]);
 	    	 else 
 	    		 return null;
-	     case "http":
+	     case HTTP :
 	    	 return getUrlStream(path);
 	     default : 
 	    	 return null;

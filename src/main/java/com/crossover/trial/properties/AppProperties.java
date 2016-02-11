@@ -5,8 +5,6 @@ import java.util.List;
 /**
  * Generic interface for access loaded system properties.
  *
- * Note: Candidates should not change this interface.
- *
  * @author code test administrator
  */
 public interface AppProperties {

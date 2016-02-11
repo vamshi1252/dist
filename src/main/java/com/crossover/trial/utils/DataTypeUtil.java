@@ -4,8 +4,19 @@ import com.amazonaws.regions.Regions;
 
 import static com.crossover.trial.utils.DataType.*;
 
+/**
+ * Utility class to determine the data type of the property
+ * 
+ * @author vamshi.vijay
+ */
 public class DataTypeUtil {
 
+	/**
+	 * determines the data type of the given keyword value
+	 * 
+	 * @param string
+	 * @return classname of the property value
+	 */
     public static String getDataType(String string) {
 
         String trimmedString = string.trim();

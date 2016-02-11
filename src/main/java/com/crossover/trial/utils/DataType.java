@@ -1,9 +1,14 @@
 package com.crossover.trial.utils;
 
-import com.amazonaws.regions.Regions;
 import lombok.Getter;
-import org.json.simple.JSONArray;
 
+import com.amazonaws.regions.Regions;
+
+/**
+ * This class determines the datatype of the property
+ * 
+ * @author vamshi.vijay
+ */
 public enum DataType {
 
     INTEGER(Integer.class.toString()),

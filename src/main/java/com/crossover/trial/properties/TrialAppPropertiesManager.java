@@ -14,11 +14,6 @@ import com.crossover.trial.parser.Parser;
 import com.crossover.trial.reader.Reader;
 
 /**
- * A simple main method to load and print properties. You should feel free to change this class or to create additional
- * class. You may add addtional methods, but must implement the AppPropertiesManager API contract.
- * 
- * Note: a default constructor is required
- *
  * @author code test administrator
  */
 public class TrialAppPropertiesManager implements AppPropertiesManager {
@@ -55,9 +50,6 @@ public class TrialAppPropertiesManager implements AppPropertiesManager {
     	TrialAppPropertiesManager tp = new TrialAppPropertiesManager();
     	List<String> propUris  = new ArrayList<String>();
     	propUris.add("file:///Users/vamshi.vijay/codebase/test/properties-dist/src/main/resources/aws.properties");
-//    	propUris.add("file:///Users/vamshi.vijay/codebase/test/properties-dist/src/main/resources/config.json");
-//    	propUris.add("http://anirudhrachuri.github.io/params.json");
-//    	propUris.add("classpath:config.json");
     	tp.loadProps(propUris);
     }
 }

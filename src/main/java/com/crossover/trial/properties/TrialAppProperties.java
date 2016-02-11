@@ -10,10 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.crossover.trial.dto.TrialProperty;
 
 /**
- * A dummy implementation of TrialAppProperties, this clearly doesn't work. Candidates SHOULD change this class to add
- * their implementation. You are also free to create additional classes
- *
- * note: a default constructor is required.
+ *This class categorizes the properties(missing, known etc)
  *
  * @author code test administrator
  */
@@ -24,21 +21,33 @@ public class TrialAppProperties implements AppProperties {
 	private List<String> knownProperties =  new ArrayList<String>();
 	private boolean valid = true;
 
+    /**
+     * @return a list of properties that are unset either because they are missing or because they have the wrong type
+     */
     @Override
     public List<String> getMissingProperties() {
         return missingProperties;
     }
 
+    /**
+     * @return a list of all known keys
+     */
     @Override
     public List<String> getKnownProperties() {
         return knownProperties;
     }
 
+    /**
+     * @return true if the configuration is valid, false otherwise
+     */
     @Override
     public boolean isValid() {
         return valid;
     }
 
+    /**
+     * resets all loaded properties to null / unloaded
+     */
     @Override
     public void clear() {
     	knownProperties.clear();
@@ -47,6 +56,13 @@ public class TrialAppProperties implements AppProperties {
     	valid=true;
     }
 
+    /**
+     * Retrieves the property for the given key. Keys are case-insenstive and the use of . and _ in property names is
+     * interchangable. For example, jpa.showSQL, jpa_showsql and JPA_showSql should all retrieve the same value.
+     *
+     * @param key a property key, handled without case sensitivity. '.' and '_' are treated as equivalent
+     * @return an object of the given key or null if it is not available
+     */
     @Override
     public Object get(String key) {
     	if(StringUtils.isNotEmpty(key)) {
@@ -59,6 +75,11 @@ public class TrialAppProperties implements AppProperties {
         return null;
     }
     
+    /**
+     * Sets the property for the given keys.
+     *
+     * @param trialProperty it holds the property information which is extracted and stored in corresponding fields
+     */
     public void setProperties(TrialProperty trialProperty) {
     	if(trialProperty == null) {
     		return;

@@ -18,8 +18,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class JsonFileParser implements Parser {
+/**
+ * JsonParser to extract the properties form Json files
+ * 
+ *  @author vamshi.vijay
+ */
+public class JsonFileParserImpl implements Parser {
 
+	/**
+	 * Populates the properties extracted from inputstream to TrialAppProperties 
+	 * 
+	 * @param inputStream   stream from which properties need to be extracted
+	 * @param trialAppProperties   properties will be populated into this object
+	 * @throws ConfigException
+	 */
     @Override
     public void getProps(InputStream inputStream, TrialAppProperties trialAppProperties) throws ConfigException {
 

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.crossover.trial.parser.impl;
 
 import java.io.IOException;
@@ -19,13 +16,18 @@ import com.crossover.trial.properties.TrialAppProperties;
 import com.crossover.trial.utils.DataTypeUtil;
 
 /**
+ * extracts the properties form .properties files
+ * 
  * @author vamshi.vijay
- *
  */
-public class PropertiesImpl implements Parser {
+public class PropertiesFileParserImpl implements Parser {
 
-	/* (non-Javadoc)
-	 * @see com.crossover.trial.parser.Parser#getProps(java.lang.String)
+	/**
+	 * Populates the properties extracted from inputstream to TrialAppProperties 
+	 * 
+	 * @param inputStream   stream from which properties need to be extracted
+	 * @param trialAppProperties   properties will be populated into this object
+	 * @throws ConfigException
 	 */
 	@Override
 	public void getProps(InputStream  inputStream, TrialAppProperties trialAppProperties) throws ConfigException {

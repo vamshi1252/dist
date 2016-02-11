@@ -1,24 +1,32 @@
+/**
+ * 
+ */
 package com.crossover.trial.test;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.io.InputStream;
 
 import org.junit.Test;
 
 import com.crossover.trial.exception.ConfigException;
-import com.crossover.trial.parser.impl.JsonFileParserImpl;
+import com.crossover.trial.parser.impl.PropertiesFileParserImpl;
 import com.crossover.trial.properties.TrialAppProperties;
 import com.crossover.trial.reader.Reader;
 
-import static org.junit.Assert.*;
-
-public class JsonFileParserTest {
-
+/**
+ * @author vamshi.vijay
+ *
+ */
+public class PropertiesFileParserTest {
+	
     @Test
     public void testJsonFileParser() {
 
         Reader reader = new Reader();
         InputStream inputStream = reader.getStream("classpath", "classpath:config.json");
-        JsonFileParserImpl jsonFileParser = new JsonFileParserImpl();
+        PropertiesFileParserImpl jsonFileParser = new PropertiesFileParserImpl();
         TrialAppProperties trialAppProperties = new TrialAppProperties();
 
         try {
@@ -30,4 +38,5 @@ public class JsonFileParserTest {
         	fail();
         }
     }
+
 }

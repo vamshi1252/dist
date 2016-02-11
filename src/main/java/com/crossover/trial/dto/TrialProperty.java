@@ -7,8 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
+ * This class holds the property information
+ * 
  * @author vamshi.vijay
- *
  */
 
 @Data
@@ -16,10 +17,16 @@ import lombok.Data;
 public class TrialProperty {
 
     public TrialProperty() {}
-
+    /** name of the property */
     private String propertyName;
+    
+    /** data type of the property */
     private String propertyType;
+    
+    /** value of the property */
     private String propertyValue;
+    
+    /** flag to categorize known or unknown property */
     private boolean known;
 
 }

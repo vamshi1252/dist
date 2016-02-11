@@ -37,10 +37,8 @@ public class Test {
     public Properties getProp() {
     	return this.prop;
     }
-     
     
     public static void main(String a[]){
-         
     	Test mpc = new Test();
         System.out.println(mpc.getPropertyValue("aws_access_key"));
         System.out.println(mpc.getProp().keySet());
