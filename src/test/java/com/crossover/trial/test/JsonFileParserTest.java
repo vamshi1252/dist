@@ -1,15 +1,15 @@
 package com.crossover.trial.test;
 
-import java.io.InputStream;
-
-import org.junit.Test;
-
 import com.crossover.trial.exception.ConfigException;
 import com.crossover.trial.parser.impl.JsonFileParserImpl;
 import com.crossover.trial.properties.TrialAppProperties;
 import com.crossover.trial.reader.Reader;
+import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.io.InputStream;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 public class JsonFileParserTest {
 
@@ -27,7 +27,7 @@ public class JsonFileParserTest {
             assertNotNull(trialAppProperties.getMissingProperties());
             assertNotNull(trialAppProperties.isValid());
         } catch (ConfigException e) {
-        	fail();
+            fail();
         }
     }
 }

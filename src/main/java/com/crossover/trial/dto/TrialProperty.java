@@ -16,17 +16,15 @@ import lombok.Data;
 @AllArgsConstructor
 public class TrialProperty {
 
-    public TrialProperty() {}
     /** name of the property */
-    private String propertyName;
-    
+    private String  propertyName;
     /** data type of the property */
-    private String propertyType;
-    
+    private String  propertyType;
     /** value of the property */
-    private String propertyValue;
-    
+    private String  propertyValue;
     /** flag to categorize known or unknown property */
     private boolean known;
+
+    public TrialProperty() {}
 
 }

@@ -13,11 +13,11 @@ import java.util.Properties;
  *
  */
 public class Test {
-	
+
     private Properties prop = null;
-    
-    public Test(){
-         
+
+    public Test() {
+
         InputStream is = null;
         try {
             this.prop = new Properties();
@@ -29,21 +29,21 @@ public class Test {
             e.printStackTrace();
         }
     }
-     
-    public String getPropertyValue(String key){
-        return this.prop.getProperty(key);
-    }
-    
-    public Properties getProp() {
-    	return this.prop;
-    }
-    
-    public static void main(String a[]){
-    	Test mpc = new Test();
+
+    public static void main(String a[]) {
+        Test mpc = new Test();
         System.out.println(mpc.getPropertyValue("aws_access_key"));
         System.out.println(mpc.getProp().keySet());
-//        System.out.println("db.user: "+mpc.getPropertyValue("db.user"));
-//        System.out.println("db.password: "+mpc.getPropertyValue("db.password"));
+        // System.out.println("db.user: "+mpc.getPropertyValue("db.user"));
+        // System.out.println("db.password: "+mpc.getPropertyValue("db.password"));
+    }
+
+    public String getPropertyValue(String key) {
+        return this.prop.getProperty(key);
+    }
+
+    public Properties getProp() {
+        return this.prop;
     }
 
 }

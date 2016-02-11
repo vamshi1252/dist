@@ -11,12 +11,12 @@ import static com.crossover.trial.utils.DataType.*;
  */
 public class DataTypeUtil {
 
-	/**
-	 * determines the data type of the given keyword value
-	 * 
-	 * @param string
-	 * @return classname of the property value
-	 */
+    /**
+     * determines the data type of the given keyword value
+     * 
+     * @param string
+     * @return classname of the property value
+     */
     public static String getDataType(String string) {
 
         String trimmedString = string.trim();
@@ -60,6 +60,7 @@ public class DataTypeUtil {
         }
         return true;
     }
+
     private static boolean isInteger(String string) {
 
         try {

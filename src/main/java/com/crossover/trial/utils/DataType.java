@@ -1,8 +1,7 @@
 package com.crossover.trial.utils;
 
-import lombok.Getter;
-
 import com.amazonaws.regions.Regions;
+import lombok.Getter;
 
 /**
  * This class determines the datatype of the property
@@ -11,12 +10,8 @@ import com.amazonaws.regions.Regions;
  */
 public enum DataType {
 
-    INTEGER(Integer.class.toString()),
-    LONG(Long.class.toString()),
-    STRING(String.class.toString()),
-    BOOLEAN(Boolean.class.toString()),
-    REGION(Regions.class.toString()),
-    DOUBLE(Double.class.toString());
+    INTEGER(Integer.class.toString()), LONG(Long.class.toString()), STRING(String.class.toString()), BOOLEAN(
+            Boolean.class.toString()), REGION(Regions.class.toString()), DOUBLE(Double.class.toString());
 
     @Getter
     private String className;
