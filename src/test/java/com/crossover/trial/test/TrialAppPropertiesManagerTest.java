@@ -51,7 +51,6 @@ public class TrialAppPropertiesManagerTest {
 		propUris.add("classpath:aws.properties");
 		AppProperties ap =tp.loadProps(propUris);
 		assertNotNull(ap);
-		
 	}
 
 	@Test
@@ -61,7 +60,6 @@ public class TrialAppPropertiesManagerTest {
 		propUris.add("classpath:aws");
 		AppProperties ap =tp.loadProps(propUris);
 		assertNotNull(ap);
-		
 	}
 
 }
